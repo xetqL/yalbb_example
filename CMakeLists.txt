@@ -4,8 +4,8 @@ project(yalbb_example)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_COMPILER mpic++)
 
-file(GLOB SRC example/*.cpp)
-file(GLOB HEADERS example/*.hpp)
+file(GLOB SRC include/*.cpp)
+file(GLOB HEADERS include/*.hpp)
 
 find_package(MPI REQUIRED)
 

@@ -6,9 +6,9 @@
 #include <yalbb/probe.hpp>
 #include <yalbb/ljpotential.hpp>
 
-#include "example/initial_conditions.hpp"
-#include "example/zoltan_fn.hpp"
-#include "example/spatial_elements.hpp"
+#include "include/initial_conditions.hpp"
+#include "include/zoltan_fn.hpp"
+#include "include/spatial_elements.hpp"
 
 template<int N>
 void generate_random_particles(MESH_DATA<elements::Element<N>>& mesh, sim_param_t params){
