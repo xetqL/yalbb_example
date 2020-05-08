@@ -17,7 +17,7 @@ find_path(ZOLTAN_INCLUDE_DIRECTORY NAMES zoltan HINTS ${CMAKE_INSTALL_PREFIX}/in
 
 message(${ZOLTAN_LIBRARY_PATH})
 
-add_executable(example example.cpp ${SRC} example.cpp)
+add_executable(example example.cpp ${SRC})
 
 target_include_directories(example PRIVATE
         ${MPI_C_INCLUDE_PATH}
