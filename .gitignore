@@ -3,4 +3,6 @@ CMakeCache.txt
 cmake_install.cmake
 criterion_menon.txt
 *.cbp
-
+cmake-build-debug
+CMakeFiles/
+.idea
