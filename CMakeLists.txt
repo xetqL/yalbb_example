@@ -4,8 +4,8 @@ project(yalbb_example)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_COMPILER mpic++)
 
-file(GLOB SRC include/*.cpp)
-file(GLOB HEADERS include/*.hpp)
+file(GLOB SRC src/*.cpp)
+file(GLOB HEADERS src/*.hpp)
 
 find_package(MPI REQUIRED)
 
@@ -17,7 +17,7 @@ find_path(ZOLTAN_INCLUDE_DIRECTORY NAMES zoltan HINTS ${CMAKE_INSTALL_PREFIX}/in
 
 message(${ZOLTAN_LIBRARY_PATH})
 
-add_executable(example example.cpp ${SRC})
+add_executable(example ${SRC} ${HEADERS})
 
 target_include_directories(example PRIVATE
         ${MPI_C_INCLUDE_PATH}
