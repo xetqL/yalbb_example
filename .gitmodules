@@ -1,0 +1,3 @@
+[submodule "yalbb"]
+	path = yalbb
+	url = https://github.com/xetqL/yalbb.git
