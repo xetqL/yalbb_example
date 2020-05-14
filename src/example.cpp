@@ -98,12 +98,13 @@ int main(int argc, char** argv) {
 
     FunctionWrapper fWrapper(getPositionPtrFunc, getVelocityPtrFunc, getForceFunc, boxIntersectFunc, pointAssignFunc, doLoadBalancingFunc);
     auto datatype = elements::register_datatype<N>();
-    Probe probe(nproc);
 
-    PolicyExecutor menon_criterion_policy(&probe,[npframe = params.npframe](Probe &probe) {
-      return (probe.get_current_iteration() % npframe == 0) && (probe.get_cumulative_imbalance_time() >= probe.compute_avg_lb_time());
+    Probe probe(nproc);
+    PolicyExecutor menon_criterion_policy(&probe,[nframes=params.nframes, npframe = params.npframe](Probe &probe) {
+      return false && (probe.get_current_iteration() % npframe == 0) && (probe.get_cumulative_imbalance_time() >= probe.compute_avg_lb_time());
     });
-    auto [t, cum, dec, thist] = simulate<N>(zlb, &mesh_data, &menon_criterion_policy, fWrapper, &params, &probe, datatype, APP_COMM, "menon_");
+
+    simulate<N>(zlb, &mesh_data, &menon_criterion_policy, fWrapper, &params, &probe, datatype, APP_COMM, "menon_");
 
     MPI_Finalize();
     return 0;

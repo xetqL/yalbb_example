@@ -15,12 +15,16 @@ execute_process(COMMAND make install yalbb WORKING_DIRECTORY ${CMAKE_CURRENT_LIS
 # find MPI
 find_package(MPI REQUIRED)
 # find YALBB
-find_library(YALBB_LIBRARY_PATH NAMES yalbb HINTS ${CMAKE_CURRENT_LIST_DIR}/yalbb/build/lib)
-find_path(YALBB_INCLUDE_DIRECTORY NAMES yalbb HINTS ${CMAKE_CURRENT_LIST_DIR}/yalbb/build/include)
+find_library(YALBB_LIBRARY_PATH NAMES yalbb HINTS ${CMAKE_CURRENT_LIST_DIR}/yalbb/lib)
+find_path(YALBB_INCLUDE_DIRECTORY NAMES yalbb HINTS ${CMAKE_CURRENT_LIST_DIR}/yalbb/includes)
+
+message(${YALBB_LIBRARY_PATH})
+message(${YALBB_INCLUDE_DIRECTORY})
+
 # find my LB library (zoltan as an example)
-find_library(ZOLTAN_LIBRARY_PATH NAMES zoltan HINTS ${CMAKE_INSTALL_PREFIX}/lib)
-find_path(ZOLTAN_INCLUDE_DIRECTORY NAMES zoltan HINTS ${CMAKE_INSTALL_PREFIX}/include)
+find_library(ZOLTAN_LIBRARY_PATH NAMES zoltan HINTS /usr/local/lib)
+find_path(ZOLTAN_INCLUDE_DIRECTORY NAMES zoltan HINTS /usr/local/include)
 # Build
 add_executable(example ${SRC} ${HEADERS})
-target_include_directories(example PRIVATE ${MPI_C_INCLUDE_PATH} ${YALBB_INCLUDE_DIRECTORY})
+target_include_directories(example PRIVATE ${MPI_C_INCLUDE_PATH} ${YALBB_INCLUDE_DIRECTORY} )
 target_link_libraries(example PRIVATE ${MPI_C_LIBRARY} ${ZOLTAN_LIBRARY_PATH}  ${YALBB_LIBRARY_PATH} stdc++fs)
