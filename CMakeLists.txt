@@ -22,8 +22,10 @@ message(${YALBB_LIBRARY_PATH})
 message(${YALBB_INCLUDE_DIRECTORY})
 
 # find my LB library (zoltan as an example)
-find_library(ZOLTAN_LIBRARY_PATH NAMES zoltan HINTS /usr/local/lib)
-find_path(ZOLTAN_INCLUDE_DIRECTORY NAMES zoltan HINTS /usr/local/include)
+set(ZOLTAN_INSTALL_FOLDER /usr/local/)
+find_library(ZOLTAN_LIBRARY_PATH NAMES zoltan HINTS ${ZOLTAN_INSTALL_FOLDER}/lib)
+find_path(ZOLTAN_INCLUDE_DIRECTORY NAMES zoltan HINTS ${ZOLTAN_INSTALL_FOLDER}/include)
+
 # Build
 add_executable(example ${SRC} ${HEADERS})
 target_include_directories(example PRIVATE ${MPI_C_INCLUDE_PATH} ${YALBB_INCLUDE_DIRECTORY} )
