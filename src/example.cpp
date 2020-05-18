@@ -54,7 +54,9 @@ int main(int argc, char** argv) {
     MPI_Bcast(&params.seed, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     if (rank == 0) {
+
         print_params(params);
+        std::cout << "Computating with " << nproc << " PEs"<<std::endl;
     }
 
     if(Zoltan_Initialize(argc, argv, &ver) != ZOLTAN_OK) {
