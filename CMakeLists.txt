@@ -9,17 +9,14 @@ file(GLOB HEADERS src/*.hpp)
 # Produce YALBB library
 execute_process(COMMAND mkdir -p build WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/yalbb)
 execute_process(COMMAND cmake -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_LIST_DIR}/yalbb/build
-        -DCMAKE_BUILD_TYPE=Release . WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/yalbb)
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} . WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/yalbb)
 execute_process(COMMAND make -j 4 yalbb WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/yalbb)
-execute_process(COMMAND make install yalbb WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/yalbb)
 find_package(Threads)
 # find MPI
 find_package(MPI REQUIRED)
 # find YALBB
 find_library(YALBB_LIBRARY_PATH NAMES yalbb HINTS ${CMAKE_CURRENT_LIST_DIR}/yalbb/lib)
 find_path(YALBB_INCLUDE_DIRECTORY NAMES yalbb HINTS ${CMAKE_CURRENT_LIST_DIR}/yalbb/includes)
-
-
 # find my LB library (zoltan as an example)
 set(ZOLTAN_INSTALL_FOLDER /usr/local CACHE PATH "zoltan install folder")
 find_library(ZOLTAN_LIBRARY_PATH NAMES zoltan HINTS ${ZOLTAN_INSTALL_FOLDER}/lib)
