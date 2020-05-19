@@ -54,7 +54,6 @@ int main(int argc, char** argv) {
     MPI_Bcast(&params.seed, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     if (rank == 0) {
-
         print_params(params);
         std::cout << "Computating with " << nproc << " PEs"<<std::endl;
     }
@@ -103,7 +102,7 @@ int main(int argc, char** argv) {
 
     Probe probe(nproc);
     PolicyExecutor menon_criterion_policy(&probe,[nframes=params.nframes, npframe = params.npframe](Probe &probe) {
-      return false && (probe.get_current_iteration() % npframe == 0) && (probe.get_cumulative_imbalance_time() >= probe.compute_avg_lb_time());
+      return (probe.get_current_iteration() % npframe == 0) && (probe.get_cumulative_imbalance_time() >= probe.compute_avg_lb_time());
     });
 
     simulate<N>(zlb, &mesh_data, &menon_criterion_policy, fWrapper, &params, &probe, datatype, APP_COMM, "menon_");
